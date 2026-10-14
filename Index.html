@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKPD Digital: Dasar-Dasar PPLG - Variable JavaScript</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .code-font { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <header class="bg-indigo-700 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="text-xs uppercase tracking-wider bg-indigo-500 py-1 px-2 rounded-full font-semibold">LKPD Interaktif PPLG</span>
+                <h1 class="text-xl md:text-2xl font-bold mt-1">JavaScript - Mengenal dan Menggunakan Variable</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden sm:block">
+                    <p class="text-xs text-indigo-200">Mata Pelajaran</p>
+                    <p class="text-sm font-semibold">Dasar-Dasar PPLG</p>
+                </div>
+                <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-lg text-sm font-medium border border-indigo-400 transition flex items-center gap-1 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    Cetak / Simpan PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full space-y-10">
+
+        <!-- Identitas Pembelajaran -->
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <h2 class="text-lg font-bold text-indigo-700 mb-4 border-b pb-2 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                A. IDENTITAS PEMBELAJARAN & IDENTITAS SISWA
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm mb-6 bg-slate-50 p-4 rounded-lg border border-slate-100">
+                <div><span class="font-semibold text-slate-500 block">Mata Pelajaran:</span> Dasar-Dasar PPLG</div>
+                <div><span class="font-semibold text-slate-500 block">Materi:</span> Variable pada JavaScript</div>
+                <div><span class="font-semibold text-slate-500 block">Alokasi Waktu:</span> 2 × 45 Menit</div>
+                <div><span class="font-semibold text-slate-500 block">Model:</span> Problem Based Learning</div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Peserta Didik:</label>
+                    <input type="text" id="input-nama" placeholder="Muhamad Aldhan Nur Rohmat" class="w-full text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Kelas:</label>
+                    <input type="text" id="input-kelas" placeholder="X PPLG 2" class="w-full text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Kelompok:</label>
+                    <input type="text" id="input-kelompok" placeholder="Kelompok 3" class="w-full text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Tanggal:</label>
+                    <input type="date" id="input-tanggal" class="w-full text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <h2 class="text-base font-bold text-indigo-700 mb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    B. TUJUAN PEMBELAJARAN
+                </h2>
+                <ul class="text-xs space-y-1.5 list-disc list-inside text-slate-700">
+                    <li>Menjelaskan pengertian variable dengan bahasa sendiri.</li>
+                    <li>Menjelaskan fungsi variable dalam program.</li>
+                    <li>Membedakan let dan const secara sederhana.</li>
+                    <li>Membuat variable menggunakan JavaScript.</li>
+                    <li>Memberikan nama variable sesuai aturan penamaan.</li>
+                    <li>Menyimpan data berupa teks dan angka ke dalam variable.</li>
+                    <li>Menampilkan nilai variable menggunakan console.log()</li>
+                    <li>Membuat program sederhana menggunakan beberapa variable.</li>
+                    <li>Menemukan dan memperbaiki kesalahan sederhana pada variable.</li>
+                </ul>
+            </section>
+
+            <section class="bg-amber-50 rounded-xl shadow-sm border border-amber-200 p-6">
+                <h2 class="text-base font-bold text-amber-800 mb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    C. PETUNJUK KESELAMATAN & KERJA
+                </h2>
+                <ul class="text-xs space-y-1.5 list-disc list-inside text-amber-900">
+                    <li>Gunakan komputer/laptop dengan hati-hati. Jangan menghapus file milik teman.</li>
+                    <li>Simpan pekerjaan secara berkala. Jangan menyalin kode teman tanpa memahami fungsinya.</li>
+                    <li>Jika menemukan error, jangan panik. Baca pesan error dan diskusikan penyebabnya.</li>
+                    <li>Setiap anggota kelompok harus memahami hasil pekerjaan kelompok.</li>
+                </ul>
+            </section>
+        </div>
+
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6">
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">D. APERSEPSI</h2>
+                <p class="text-sm text-slate-600 mb-3">Bayangkan kamu sedang membuat aplikasi data siswa. Program perlu mengetahui: Nama siswa, Kelas, Umur, Nilai, Jurusan.</p>
+                <div class="bg-slate-100 p-3 rounded-lg code-font text-xs text-slate-700 mb-3">
+                    Nama siswa = "Budi"<br>
+                    Kelas = "XI RPL 1"<br>
+                    Umur = 16<br>
+                    Nilai = 85
+                </div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Menurutmu, bagaimana cara menyimpan informasi tersebut di dalam program? Tuliskan dugaanmu: </label>
+                <textarea id="ans-apersepsi" rows="2" placeholder="Menggunakan variabel sebagai wadah penampung data di dalam memori komputer, sehingga masing-masing data diberi label/nama agar dapat dipanggil dan diproses kembali oleh program." class="w-full text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">E. AKTIVITAS 1 - MENGAMATI</h2>
+                <p class="text-sm text-slate-600 mb-3">Perhatikan kode berikut dan jawab pertanyaannya:</p>
+                <div class="bg-slate-900 text-slate-200 p-4 rounded-lg code-font text-xs mb-4">
+                    <span class="text-purple-400">let</span> nama <span class="text-red-400">"Budi"</span>;<br>
+                    <span class="text-purple-400">let</span> umur = <span class="text-amber-400">16</span>;<br>
+                    <span class="text-purple-400">let</span> nilai = <span class="text-amber-400">85</span>;<br>
+                    console.log(nama);<br>
+                    console.log(umur);<br>
+                    console.log(nilai);
+                </div>
+
+                <img src="enamyfav.png" alt="enamyfav foto aldhan" width="700">
+                
+                <div class="space-y-4 text-sm">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">1. Apa yang ditampilkan pada Console?</label>
+                        <input type="text" id="ans-akt1-1" placeholder="Akan menampilkan nilai variabel secara berurutan ke bawah: Budi, 16, dan 85." class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">2. Menurutmu, apa fungsi <code class="bg-slate-100 px-1 py-0.5 rounded text-indigo-600 font-mono">nama</code>, <code class="bg-slate-100 px-1 py-0.5 rounded text-indigo-600 font-mono">umur</code>, dan <code class="bg-slate-100 px-1 py-0.5 rounded text-indigo-600 font-mono">nilai</code>?</label>
+                        <input type="text" id="ans-akt1-2" placeholder="Berfungsi sebagai nama variabel yang menampung data nama, umur, dan nilai siswa." class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">3. Apa yang terjadi jika kode <code class="bg-slate-100 px-1 py-0.5 rounded text-indigo-600 font-mono">console.log(nama);</code> dijalankan?</label>
+                        <input type="text" id="ans-akt1-3" placeholder="Browser akan menampilkan teks 'Budi' pada tab Console." class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 encrypt mb-1">4. Menurut dugaanmu, apa yang dimaksud dengan variable?</label>
+                        <textarea id="ans-akt1-4" rows="2" placeholder=" adalah tempat atau wadah di dalam memori program yang digunakan untuk menyimpan suatu data agar dapat dipanggil dan digunakan kembali." class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">F. AKTIVITAS 2 - MENGENAL VARIABLE</h2>
+                <p class="text-sm text-slate-600 mb-3">Variable dapat dianggap sebagai tempat untuk menyimpan sebuah data agar data tersebut dapat digunakan kembali oleh program.</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border border-slate-200 rounded-lg overflow-hidden">
+                        <thead class="bg-indigo-50 text-indigo-900">
+                            <tr><th class="p-2.5 border-b">Bagian</th><th class="p-2.5 border-b">Fungsi</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 bg-white">
+                            <tr><td class="p-2.5 font-mono text-indigo-600">let</td><td class="p-2.5">Membuat variable</td></tr>
+                            <tr><td class="p-2.5 font-mono text-indigo-600">nama</td><td class="p-2.5">Nama variable</td></tr>
+                            <tr><td class="p-2.5 font-mono text-indigo-600">=</td><td class="p-2.5">Memberikan nilai</td></tr>
+                            <tr><td class="p-2.5 font-mono text-indigo-600">"Andi"</td><td class="p-2.5">Nilai yang disimpan</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6">
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-1">G & H. AKTIVITAS 3 & 4 - PRAKTIK & EKSPERIMEN CODE EDITOR & RUNNER</h2>
+                <p class="text-sm text-slate-600 mb-4">Uji coba dan jalankan kode JavaScript secara langsung di bawah ini. Ubah nilai sesuai data kamu!</p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Editor -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center bg-slate-800 px-4 py-2 rounded-t-lg text-xs text-slate-300">
+                            <span class="font-mono">variable.html / script</span>
+                            <span class="text-emerald-400 font-semibold">Live Sandbox</span>
+                        </div>
+                        <textarea id="code-sandbox" class="w-full h-48 bg-slate-900 text-emerald-400 code-font text-xs p-4 rounded-b-lg focus:outline-none resize-none">let nama = "Budi";
+let kelas = "XI RPL 1";
+let umur = 16;
+console.log(nama);
+console.log(kelas);
+console.log(umur);</textarea>
+                        <button onclick="runCode()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-4 rounded-lg text-sm transition shadow-sm flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Jalankan Kode (Run)
+                        </button>
+                    </div>
+
+                    <!-- Console Output -->
+                    <div class="space-y-2">
+                        <div class="bg-slate-800 px-4 py-2 rounded-t-lg text-xs text-slate-300 flex justify-between items-center">
+                            <span>Console Output</span>
+                            <button onclick="clearConsole()" class="text-slate-400 hover:text-white text-xs">Clear</button>
+                        </div>
+                        <div id="console-output" class="w-full h-48 bg-slate-950 text-slate-200 code-font text-xs p-4 rounded-b-lg overflow-y-auto border border-slate-800 select-all">
+                            <span class="text-slate-500">// Hasil console.log() akan muncul di sini...</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <img src="enaluv.png" alt="enafavaldan" width="700">
+            
+
+
+
+            <!-- Form Hasil Pengamatan & Pertanyaan Aktivitas 4 -->
+            <div class="border-t pt-6 space-y-4 text-sm">
+                <h3 class="font-bold text-slate-700">Hasil Pengamatan Aktivitas 3:</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Nama:</label>
+                        <input type="text" id="Budi" class="w-full border rounded-lg p-2 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Kelas:</label>
+                        <input type="text" id="XI RPl 1" class="w-full border rounded-lg p-2 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Umur:</label>
+                        <input type="text" id="16" class="w-full border rounded-lg p-2 text-sm">
+                    </div>
+                </div>
+
+                <h3 class="font-bold text-slate-700 pt-2">Pertanyaan Aktivitas 4:</h3>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">1. Apakah hasil pada Console berubah?</label>
+                    <input type="text" id="ans-akt4-1" placeholder="Ya, hasil pada Console berubah sesuai dengan data baru yang dimasukkan." class="w-full border rounded-lg p-2 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">2. Bagian kode mana yang kamu ubah?</label>
+                    <input type="text" id="ans-akt4-2" placeholder="=" class="w-full border rounded-lg p-2 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">3. Mengapa program dapat menampilkan data yang baru?</label>
+                    <input type="text" id="ans-akt4-3" placeholder="Karakteristik variabel memungkinkan nilai data di dalamnya diperbarui saat program berjalan." class="w-full border rounded-lg p-2 text-sm">
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6">
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">I. AKTIVITAS 5 - VARIABLE UNTUK MENYIMPAN BERBAGAI DATA</h2>
+                <p class="text-sm text-slate-600 mb-3">Lengkapi identifikasi jenis data berikut:</p>
+                <div class="overflow-x-auto mb-4">
+                    <table class="w-full text-left text-xs border border-slate-200 rounded-lg overflow-hidden">
+                        <thead class="bg-indigo-50 text-indigo-900">
+                            <tr><th class="p-2.5 border-b">Variable</th><th class="p-2.5 border-b">Nilai</th><th class="p-2.5 border-b">Jenis Data</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 bg-white text-slate-700">
+                            <tr>
+                                <td class="p-2.5 font-mono">nama</td>
+                                <td class="p-2.5 font-mono">"Andi"</td>
+                                <td class="p-2.5"><input type="text" id="dt-nama" placeholder="Teks / String..." class="border rounded px-2 py-1 text-xs w-full"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-mono">umur</td>
+                                <td class="p-2.5 font-mono">17</td>
+                                <td class="p-2.5"><input type="text" id="dt-umur" placeholder="Angka / Number..." class="border rounded px-2 py-1 text-xs w-full"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-mono">tinggi</td>
+                                <td class="p-2.5 font-mono">170</td>
+                                <td class="p-2.5"><input type="text" id="dt-tinggi" placeholder="Angka / Number..." class="border rounded px-2 py-1 text-xs w-full"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-mono">aktif</td>
+                                <td class="p-2.5 font-mono">true</td>
+                                <td class="p-2.5"><input type="text" id="dt-aktif" placeholder="Boolean..." class="border rounded px-2 py-1 text-xs w-full"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bg-indigo-50 p-4 rounded-lg text-xs space-y-2 text-indigo-900">
+                    <p class="font-bold">Kesimpulan:</p>
+                    <p>Data yang ditulis menggunakan tanda kutip seperti <code class="bg-white px-1 py-0.5 rounded border">"Andi"</code> merupakan data: <input type="text" id="kes-teks" class="border rounded px-2 py-0.5 w-40 text-xs bg-white"></p>
+                    <p>Sedangkan <code class="bg-white px-1 py-0.5 rounded border">17</code> merupakan data: <input type="text" id="kes-angka" class="border rounded px-2 py-0.5 w-40 text-xs bg-white"></p>
+                </div>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">J. AKTIVITAS 6 – MENGENAL let DAN const</h2>
+                <p class="text-sm text-slate-600 mb-3">Lengkapi tabel kegunaan <code class="bg-slate-100 px-1 py-0.5 rounded text-indigo-600 font-mono">let</code> dan <code class="bg-slate-100 px-1 py-0.5 rounded text-indigo-600 font-mono">const</code>:</p>
+                <div class="overflow-x-auto mb-4">
+                    <table class="w-full text-left text-xs border border-slate-200 rounded-lg overflow-hidden">
+                        <thead class="bg-indigo-50 text-indigo-900">
+                            <tr><th class="p-2.5 border-b">Keyword</th><th class="p-2.5 border-b">Nilai dapat diubah? (Ya/Tidak)</th><th class="p-2.5 border-b">Kegunaan Sederhana</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 bg-white">
+                            <tr>
+                                <td class="p-2.5 font-mono font-bold text-indigo-600">let</td>
+                                <td class="p-2.5"><input type="text" id="let-ubah" placeholder="ya" class="border rounded px-2 py-1 text-xs w-full"></td>
+                                <td class="p-2.5"><input type="text" id="let-guna" placeholder="Untuk data yang nilainya masih mungkin berubah (seperti skor, umur, nilai)." class="border rounded px-2 py-1 text-xs w-full"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-mono font-bold text-indigo-600">const</td>
+                                <td class="p-2.5"><input type="text" id="const-ubah" placeholder="tidak" class="border rounded px-2 py-1 text-xs w-full"></td>
+                                <td class="p-2.5"><input type="text" id="const-guna" placeholder="Untuk data yang nilainya tetap/konstan (seperti nama,sekolah,tanggal lahir)." class="border rounded px-2 py-1 text-xs w-full"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6 text-sm">
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">K & L. AKTIVITAS 7 & 8 - ATURAN PENAMAAN VARIABLE</h2>
+                <p class="text-slate-600 mb-3">Berikan tanda centang (V) untuk nama variable yang benar dan silang (X) untuk yang salah:</p>
+                
+                <div class="overflow-x-auto mb-4">
+                    <table class="w-full text-left text-xs border border-slate-200 rounded-lg overflow-hidden">
+                        <thead class="bg-indigo-50 text-indigo-900">
+                            <tr><th class="p-2.5 border-b">No.</th><th class="p-2.5 border-b">Nama Variable</th><th class="p-2.5 border-b">Status (V / X)</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 bg-white text-slate-700 font-mono">
+                            <tr><td class="p-2.5">1</td><td class="p-2.5">nama</td><td class="p-2.5"><input type="text" id="v-1" value="V" class="border rounded px-2 py-1 text-xs w-16 text-center"></td></tr>
+                            <tr><td class="p-2.5">2</td><td class="p-2.5">namaSiswa</td><td class="p-2.5"><input type="text" id="v-2" value="V" class="border rounded px-2 py-1 text-xs w-16 text-center"></td></tr>
+                            <tr><td class="p-2.5">3</td><td class="p-2.5">nama_siswa</td><td class="p-2.5"><input type="text" id="v-3" value="V" class="border rounded px-2 py-1 text-xs w-16 text-center"></td></tr>
+                            <tr><td class="p-2.5">4</td><td class="p-2.5">2nama</td><td class="p-2.5"><input type="text" id="v-4" value="X" class="border rounded px-2 py-1 text-xs w-16 text-center"></td></tr>
+                            <tr><td class="p-2.5">5</td><td class="p-2.5">nama siswa</td><td class="p-2.5"><input type="text" id="v-5" value="X" class="border rounded px-2 py-1 text-xs w-16 text-center"></td></tr>
+                            <tr><td class="p-2.5">6</td><td class="p-2.5">nilaiAkhir</td><td class="p-2.5"><input type="text" id="v-6" value="V" class="border rounded px-2 py-1 text-xs w-16 text-center"></td></tr>
+                            <tr><td class="p-2.5">7</td><td class="p-2.5">nilai1</td><td class="p-2.5"><input type="text" id="v-7" value="V" class="border rounded px-2 py-1 text-xs w-16 text-center"></td></tr>
+                            <tr><td class="p-2.5">8</td><td class="p-2.5">nilai-akhir</td><td class="p-2.5"><input type="text" id="v-8" value="X" class="border rounded px-2 py-1 text-xs w-16 text-center"></td></tr>
+                            <tr><td class="p-2.5">9</td><td class="p-2.5">Alamat</td><td class="p-2.5"><input type="text" id="v-9" value="V" class="border rounded px-2 py-1 text-xs w-16 text-center"></td></tr>
+                            <tr><td class="p-2.5">10</td><td class="p-2.5">alamatSiswa</td><td class="p-2.5"><input type="text" id="v-10" value="V" class="border rounded px-2 py-1 text-xs w-16 text-center"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-lg border">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">2nama Menjadi:</label>
+                        <input type="text" id="fix-1" value="nama2 atau duaNama" class="w-full border rounded p-1.5 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">nama siswa Menjadi:</label>
+                        <input type="text" id="fix-2" value="namaSiswa" class="w-full border rounded p-1.5 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">nilai-akhir Menjadi:</label>
+                        <input type="text" id="fix-3" value="nilaiAkhir" class="w-full border rounded p-1.5 text-xs">
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">M. AKTIVITAS 9 - TANTANGAN DATA DIRI</h2>
+                <p class="text-slate-600 mb-2">Buat program JavaScript minimal 5 variable yang menyimpan: Nama, Kelas, Jurusan, Umur, Hobi.</p>
+                <textarea id="code-akt9" rows="6" class="w-full bg-slate-900 text-emerald-400 code-font text-xs p-4 rounded-lg focus:outline-none">let nama = "Nama Kamu";
+let kelas = "XI RPL 1";
+let jurusan = "Rekayasa Perangkat Lunak";
+let umur = 17;
+let hobi = "Coding";
+console.log(nama);
+console.log(kelas);
+console.log(jurusan);
+console.log(umur);
+console.log(hobi);</textarea>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6 text-sm">
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">N. AKTIVITAS 10 - TANTANGAN LEVEL 2 (NILAI SISWA)</h2>
+                <p class="text-slate-600 mb-2">Simpan data: Nama siswa, Nilai Bahasa Indonesia, Nilai Matematika, Nilai Produktif.</p>
+                <textarea id="code-akt10" rows="6" class="w-full bg-slate-900 text-emerald-400 code-font text-xs p-4 rounded-lg focus:outline-none">let namaSiswa = "Andi";
+let bahasaIndonesia = 80;
+let matematika = 85;
+let produktif = 90;
+console.log(namaSiswa);
+console.log(bahasaIndonesia);
+console.log(matematika);
+console.log(produktif);</textarea>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">1. Berapa variable yang kamu buat?</label>
+                        <input type="text" id="ans-akt10-1" placeholder="Jawaban..." class="w-full border rounded p-2 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">2. Mana variable yang menyimpan teks?</label>
+                        <input type="text" id="ans-akt10-2" placeholder="Jawaban..." class="w-full border rounded p-2 text-xs">
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">O. AKTIVITAS 11 - DEBUGGING</h2>
+                <p class="text-slate-600 mb-2">Perbaiki program berikut yang memiliki error:</p>
+                <div class="bg-slate-900 text-rose-400 code-font text-xs p-3 rounded-lg mb-3">
+                    let nama siswa = "Budi";<br>
+                    let umur = 16;<br>
+                    let 2kelas = "XI RPL";<br>
+                    console.log(nama siswa);<br>
+                    console.log(umur);<br>
+                    console.log(2kelas);
+                </div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Program yang sudah diperbaiki:</label>
+                <textarea id="code-akt11" rows="5" class="w-full bg-slate-900 text-emerald-400 code-font text-xs p-4 rounded-lg focus:outline-none mb-3">let namaSiswa = "Budi";
+let umur = 16;
+let kelas2 = "XI RPL";
+console.log(namaSiswa);
+console.log(umur);
+console.log(kelas2);</textarea>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Apa saja kesalahan yang kamu temukan?</label>
+                <textarea id="ans-akt11-err" rows="3" placeholder="1. Spasi pada nama variable...&#10;2. Angka di awal nama variable..." class="w-full border rounded p-2 text-xs"></textarea>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">P. AKTIVITAS 12 - CHALLENGE PROFIL SISWA</h2>
+                <p class="text-slate-600 mb-2">Buat program menggunakan <code class="bg-slate-100 px-1 rounded text-indigo-600 font-mono">const</code> dengan minimal 7 variable dasar ditambah 2 variable tambahan!</p>
+                <textarea id="code-akt12" rows="8" class="w-full bg-slate-900 text-emerald-400 code-font text-xs p-4 rounded-lg focus:outline-none">const nama = "Andi";
+const kelas = "XI RPL 1";
+const jurusan = "Rekayasa Perangkat Lunak";
+const umur = 17;
+const kota = "Garut";
+const hobi = "Coding";
+const citaCita = "Programmer";
+const sekolah = "SMKN 1 Garut"; // Tambahan 1
+const statusPelajar = "Aktif"; // Tambahan 2
+console.log(nama);
+console.log(kelas);
+console.log(jurusan);
+console.log(umur);
+console.log(kota);
+console.log(hobi);
+console.log(citaCita);
+console.log(sekolah);
+console.log(statusPelajar);</textarea>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6 text-sm">
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">Q. AKTIVITAS 13 – THINK PAIR SHARE</h2>
+                <label class="block font-semibold text-slate-700 mb-1">Menurutmu, mengapa programmer membutuhkan variable?</label>
+                <textarea id="ans-akt13" rows="3" placeholder="Tuliskan pendapatmu..." class="w-full border rounded p-2 text-xs mb-3"></textarea>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-lg border">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Apakah jawaban kalian sama dengan teman?</label>
+                        <select id="pair-sama" class="w-full border rounded p-2 text-xs bg-white">
+                            <option value="Ya">Ya</option>
+                            <option value="Tidak">Tidak</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Kesimpulan Kelompok:</label>
+                        <input type="text" id="pair-kesimpulan" placeholder="Kesimpulan..." class="w-full border rounded p-2 text-xs bg-white">
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">R & S. REFLEKSI & REFLEKSI 3-2-1</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <h3 class="font-semibold text-slate-700">3 Hal yang Saya Pelajari:</h3>
+                        <input type="text" id="ref-3-1" placeholder="1..." class="w-full border rounded p-2 text-xs">
+                        <input type="text" id="ref-3-2" placeholder="2..." class="w-full border rounded p-2 text-xs">
+                        <input type="text" id="ref-3-3" placeholder="3..." class="w-full border rounded p-2 text-xs">
+                    </div>
+                    <div class="space-y-3">
+                        <h3 class="font-semibold text-slate-700">2 Hal yang Masih Membingungkan:</h3>
+                        <input type="text" id="ref-2-1" placeholder="1..." class="w-full border rounded p-2 text-xs">
+                        <input type="text" id="ref-2-2" placeholder="2..." class="w-full border rounded p-2 text-xs">
+                        <h3 class="font-semibold text-slate-700 pt-1">1 Hal yang Ingin Saya Coba:</h3>
+                        <input type="text" id="ref-1-1" placeholder="1..." class="w-full border rounded p-2 text-xs">
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">T. KESIMPULAN</h2>
+                <div class="space-y-2 text-xs text-slate-700">
+                    <p>• Variable adalah <input type="text" id="kon-1" class="border rounded px-2 py-1 w-64 inline-block text-xs bg-white" placeholder="Tempat menyimpan data..."></p>
+                    <p>• <code class="font-mono text-indigo-600">let</code> digunakan untuk <input type="text" id="kon-2" class="border rounded px-2 py-1 w-64 inline-block text-xs bg-white" placeholder="Data yang bisa berubah..."></p>
+                    <p>• <code class="font-mono text-indigo-600">const</code> digunakan untuk <input type="text" id="kon-3" class="border rounded px-2 py-1 w-64 inline-block text-xs bg-white" placeholder="Data tetap/tidak berubah..."></p>
+                    <p>• Untuk menampilkan isi variable ke Console kita dapat menggunakan <input type="text" id="kon-4" class="border rounded px-2 py-1 w-48 inline-block text-xs bg-white" placeholder="console.log()"></p>
+                </div>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">U. TUGAS INDIVIDU - DATA PRODUK SEDERHANA</h2>
+                <p class="text-slate-600 mb-2">Tema: "Data Produk Sederhana" (Minimal 6 variable menggunakan let dan const).</p>
+                <textarea id="code-tugas" rows="8" class="w-full bg-slate-900 text-emerald-400 code-font text-xs p-4 rounded-lg focus:outline-none">const namaProduk = "Keyboard";
+const kategori = "Perangkat Komputer";
+const harga = 150000;
+let stok = 10;
+const merek = "ABC";
+const tersedia = true;
+console.log(namaProduk);
+console.log(kategori);
+console.log(harga);
+console.log(stok);
+console.log(merek);
+console.log(tersedia);</textarea>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <div>
+                <h2 class="text-lg font-bold text-indigo-700 mb-2">Y. EXIT TICKET</h2>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">1. Apa itu variable?</label>
+                        <input type="text" id="exit-1" placeholder="Jawaban..." class="w-full border rounded p-2 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">2. Apa perbedaan let dan const?</label>
+                        <input type="text" id="exit-2" placeholder="Jawaban..." class="w-full border rounded p-2 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">3. Tuliskan satu contoh variable JavaScript.</label>
+                        <input type="text" id="exit-3" placeholder="Jawaban..." class="w-full border rounded p-2 text-xs">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-indigo-900 text-white rounded-xl shadow-lg p-6 text-center space-y-4">
+            <h2 class="text-xl font-bold">Selesai Mengerjakan LKPD?</h2>
+            <p class="text-indigo-200 text-sm max-w-xl mx-auto">Pastikan semua isian, jawaban, dan kode program telah diuji coba melalui console. Klik tombol di bawah untuk merekap atau mengunduh hasil pekerjaanmu.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="alertCustom('Pekerjaan LKPD berhasil diserahkan dan siap dinilai!')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition shadow">
+                    Kumpulkan Tugas LKPD
+                </button>
+                <button onclick="window.print()" class="bg-indigo-700 hover:bg-indigo-600 text-indigo-100 border border-indigo-500 font-semibold px-6 py-2.5 rounded-lg text-sm transition shadow">
+                    Cetak Lembar Kerja
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="custom-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-sm w-full p-6 text-center shadow-2xl space-y-4">
+            <h3 id="modal-title" class="text-lg font-bold text-slate-800">Informasi</h3>
+            <p id="modal-message" class="text-sm text-slate-600">Pesan...</p>
+            <button onclick="closeModal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg text-sm transition">OK</button>
+        </div>
+    </div>
+
+    <footer class="bg-slate-800 text-slate-400 py-6 text-center text-xs border-t border-slate-700 mt-auto">
+        <p>LKPD Digital Interaktif - Dasar-Dasar Pengembangan Perangkat Lunak dan Gim (PPLG)</p>
+        <p class="mt-1">Materi: JavaScript Variable &copy; 2026</p>
+    </footer>
+
+    <script>
+        // Custom Alert Modal (No alert() used per instructions)
+        function alertCustom(message, title = "Informasi LKPD") {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        // Interactive Code Runner (Sandbox)
+        function runCode() {
+            const code = document.getElementById('code-sandbox').value;
+            const consoleOutput = document.getElementById('console-output');
+            consoleOutput.innerHTML = ''; // clear
+
+            // Capture console.log
+            const logs = [];
+            const customConsole = {
+                log: function(...args) {
+                    logs.push(args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : String(arg)).join(' '));
+                }
+            };
+
+            try {
+                // Safe evaluation wrapper
+                const runFunc = new Function('console', code);
+                runFunc(customConsole);
+
+                if (logs.length === 0) {
+                    consoleOutput.innerHTML = '<span class="text-yellow-400">// Program berjalan tanpa output console.log()</span>';
+                } else {
+                    logs.forEach(log => {
+                        const div = document.createElement('div');
+                        div.className = 'text-emerald-400 py-0.5 border-b border-slate-900';
+                        div.innerText = '> ' + log;
+                        consoleOutput.appendChild(div);
+                    });
+                }
+            } catch (err) {
+                const errDiv = document.createElement('div');
+                errDiv.className = 'text-rose-400 py-0.5';
+                errDiv.innerText = 'Error: ' + err.message;
+                consoleOutput.appendChild(errDiv);
+            }
+        }
+
+        function clearConsole() {
+            document.getElementById('console-output').innerHTML = '<span class="text-slate-500">// Console dibersihkan...</span>';
+        }
+
+        // Set default date to today
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('input-tanggal');
+            if(dateInput) dateInput.value = today;
+        });
+    </script>
+</body>
+</html>
